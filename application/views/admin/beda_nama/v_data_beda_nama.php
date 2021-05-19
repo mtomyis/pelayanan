@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<?php $this->load->view("admin/template/header.php") ?>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <?php $this->load->view("admin/template/menubar.php") ?>
+
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark"><?php echo $namaHalaman; ?></h1> <!-- nanti isi sesuai halaman -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+        <!-- ini sisi konten dari halaman -->
+        <!-- /.card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><a href="<?php echo base_url('C_beda_nama/pindahtambahdata') ?>" type="button" class="btn btn-primary">Tambah Data</a></h3>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>NIK</th>
+                  <th>Nama Lama</th>
+                  <th>Nama Baru</th>
+                  <th>Tanggal</th>
+                  <th>Maksud Pembuatan</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <!-- <tr>
+                    <td><?php echo $data_beda_nama->nama_penduduk; ?></td>
+                  </tr> -->
+                  <?php
+                  $no = 1;
+                  // varibel kiriman dari controller di jadikan 1 1 trus disimmpan di variabwl value
+                  foreach ($data_beda_nama as $value) {
+                    # code...
+                  ?>
+
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><a href="<?php echo base_url() ?>C_beda_nama/lihat/<?php echo $value->id_beda_nama?>"><?php echo $value->nik ?></a></td> <!-- melihat data lebih lkengkap dengan cara memilih nik -->
+                  <td><?php echo $value->nama_penduduk ?></td>
+                  <td><?php echo $value->nama_baru ?></td> 
+                  <td><?php echo date_format(date_create($value->tanggal),"d/m/Y")?></td>
+                  <td><?php echo $value->maksud_pembuatan ?></td>
+
+                  <td>
+                  <?php if ($value->status == "Request") {
+                    echo '<span class="badge badge-warning"><a style="color: black; text-decoration: none;" href="'.base_url() ?>C_beda_nama/statusrequest/<?php echo $value->id_beda_nama.'">'. $value->status.'</a>
+                  </span>';
+                  } elseif ($value->status == "Tervalidasi") {
+                     echo '<span class="badge badge-success"><a style="color: white; text-decoration: none;" href="'.base_url() ?>C_beda_nama/statusvalidasi/<?php echo $value->id_beda_nama.'">'. $value->status. '</a>
+                  </span>';
+                  } ?>
+                  </td
+                  >
+                  <td>
+                   <a class="btn btn-primary btn-sm " href="<?php echo base_url() ?>C_beda_nama/validasi/<?php echo $value->id_beda_nama?>">Download</a> 
+                    <!-- ini mauvalidasi manggil data sesuai idnnya, misal nama ericko ber id 10, maka yg di kirimke funtion validasi adalah id 10 -->
+                     <a class="btn btn-info btn-sm" href="<?php echo base_url() ?>C_beda_nama/lihatedit/<?php echo $value->id_beda_nama?>" >Edit</a>
+                     
+                     <a class="btn btn-danger btn-sm" href="<?php echo base_url() ?>C_beda_nama/hapus/<?php echo $value->id_beda_nama?>">Delete</a>
+                    </td>
+                </tr>
+
+              <?php } ?>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>No.</th>
+                  <th>NIK</th>
+                  <th>Nama Lama</th>
+                  <th>Nama Baru</th>
+                  <th>Tanggal</th>
+                  <th>Maksud Pembuatan</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.card -->
+        <!-- ini akhir sisi konten dari halaman -->
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <?php $this->load->view("admin/template/footer.php") ?>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+  });
+</script>
+</body>
+</html>

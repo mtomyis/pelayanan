@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<?php $this->load->view("admin/template/header.php") ?>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <?php $this->load->view("admin/template/menubar.php") ?>
+
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Galeri</h1> <!-- nanti isi sesuai halaman -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+        <!-- ini sisi konten dari halaman -->
+        <!-- /.card -->
+          <div class="card">
+            <div class="card-body">
+              <div class="container">
+      <h2>Edit User</h2>
+      <div class="row">
+        <form action="<?=base_url()?>C_galeri/updatedata" method="post" enctype="multipart/form-data">
+          <label>Nama</label><br>
+          <input type="text" name="judul" class="form-control" value="<?=$data->judul?>"><br><br>
+          <label>Alamat</label><br>
+          <textarea name="keterangan" class="form-control" rows="8" cols="80"><?=$data->keterangan?></textarea><br><br>
+          <label>foto</label><br>
+          <input type="file" name="fotopost"><br><br>
+
+          <!-- file lama -->
+          <input type="hidden" name="filelama" value="<?=$data->foto?>">
+          <!-- ID -->
+          <input type="hidden" name="id" value="<?=$data->id?>">
+
+          <input type="submit" name="submit" value="Submit" class="btn btn-default">
+        </form>
+
+      </div>
+    </div>
+<!-- END KONTEN UTAMA -->
+
+    <script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>
+          </div>
+          <!-- /.card -->
+        <!-- ini akhir sisi konten dari halaman -->
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <?php $this->load->view("admin/template/footer.php") ?>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+  });
+</script>
+</body>
+</html>
